@@ -1,0 +1,77 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Update list</h1>
+
+<form action="{% url 'book_update' book.pk %}" method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label>Title:</label>
+        {{ form.title }}
+        {% for error in form.title.errors %}
+        <span style="color:red">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        <label>User:</label>
+        {{ form.user }}
+        {% for error in form.user.errors %}
+        <span style="color:red">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        <label>Body:</label>
+        {{ form.body }}
+        {% for error in form.body.errors %}
+        <span style="color:red">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        <label>Price:</label>
+        {{ form.price }}
+        {% for error in form.price.errors %}
+        <span style="color:red">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        <label>Rating:</label>
+        {{ form.rating }}
+        {% for error in form.rating.errors %}
+        <span style="color:red">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        <label>Publication Date:</label>
+        {{ form.pub_date }}
+        {% for error in form.pub_date.errors %}
+        <span style="color:red">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        <label>Author(s):</label>
+        {{ form.author }}
+        {% for error in form.author.errors %}
+        <span style="color:red">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <div class="form-group">
+        <label>Publisher:</label>
+        {{ form.publisher }}
+        {% for error in form.publisher.errors %}
+        <span style="color:red">{{ error }}</span>
+        {% endfor %}
+    </div>
+
+    <button type="submit" class="btn">Save</button>
+</form>
+
+{% endblock content %}

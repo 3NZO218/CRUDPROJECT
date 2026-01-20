@@ -1,0 +1,33 @@
+{% load static %}
+
+<html lang="en">
+    <head>
+     <meta charset="UTF-8">
+        <title>My Site</title>
+            <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    </head>
+
+<body>
+
+    {% include 'app/navbar.html' %}
+
+    {% if user.is_authenticated %}
+    <p>HI {{user.username}}</p>
+        <form method="post" action="{% url 'logout' %}">
+            {% csrf_token %}
+            <button type="submit">Log out</button>
+        </form>
+    {% else %}
+        <p>You are not logged in</p>
+    {% endif %}
+
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <script src="{% static 'js/base.js' %}"></script>
+
+</body>
+</html>

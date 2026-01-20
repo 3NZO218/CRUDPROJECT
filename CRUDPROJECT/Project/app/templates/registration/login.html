@@ -1,0 +1,28 @@
+
+{% extends 'app/base.html' %}
+{% load static %}
+
+{% block content %}
+    <h2>Log In</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="container">
+        {% if form.errors %}
+            <p style="color: red;">Invalid username or password.</p>
+        {% endif %}
+
+        <label for="id_username">Username</label>
+        <input type="text" id="id_username" placeholder="Enter your username" name="username" required>
+<br>
+        <br>
+
+        <label for="id_password">Password</label>
+        <input type="password" id="id_password" placeholder="Enter your password" name="password" required>
+    </div>
+
+    <button type="submit">Log In</button>
+</form>
+{% endblock content %}
+

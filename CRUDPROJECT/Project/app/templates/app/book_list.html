@@ -1,0 +1,70 @@
+{% extends 'app/base.html' %}
+{% block content %}
+
+<a href="{% url 'book_create' %}">+Add New Book</a>
+<br>
+
+<form method="get" action="{% url 'book' %}">
+    <label>
+        <input type="text" name="q" placeholder="Search for title..." value="{{ search_query }}">
+    </label>
+    <button type="submit">Search</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Body</th>
+            <th>Rating</th>
+            <th>Publication Date</th>
+            <th>Price</th>
+            <th>Authors</th>
+            <th>Publishers</th>
+            <th>Added by</th>
+            <th>View</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.body }}</td>
+            <td>{{ book.rating }}</td>
+            <td>{{ book.pub_date|date:"M d, Y" }}</td>
+            <td>{{ book.price }}</td>
+            <td>
+                {% for author in book.author.all %}
+                {{ author.first_name }} {{ author.last_name }}{% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td>{{ book.publisher.name }}</td>
+            <td>{{ book.user }}</td>
+            <td><a href="{% url 'book_detail' book.pk %}">+View</a></td>
+            <td><a href="{% url 'book_update' book.pk %}">+Update Book</a></td>
+            <td><a href="{% url 'book_delete' book.pk %}">+Delete Book</a></td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="11">No books found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+
+    <tfoot>
+        <tr>
+            <td>Total</td>
+            <td colspan="3">{{ total_books }}</td>
+            <td>{{ sum_book_price }}</td>
+            <td>{{ total_authors }}</td>
+            <td>{{ total_publishers }}</td>
+            <td>{{ total_users }}</td>
+            <td colspan="3"></td>
+        </tr>
+    </tfoot>
+</table>
+
+{% endblock content %}

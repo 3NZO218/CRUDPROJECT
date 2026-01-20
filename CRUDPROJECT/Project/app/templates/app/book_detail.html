@@ -1,0 +1,18 @@
+{% extends 'app/base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+<div class="post-entry">
+    <h2><a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a></h2>
+    <p>{{ book.body }}</p>
+</div>
+
+<a href="{% url 'book_create' %}">+Add New Book</a><br>
+<a href="{% url 'book_update' book.pk %}">+Update Book</a><br>
+<a href="{% url 'book_delete' book.pk %}">+ Delete Book</a><br>
+<a href="{% url 'login' %}">+ Login</a><br>
+<a href="{% url 'signup' %}">+ Signup</a>
+
+{% endblock content %}
